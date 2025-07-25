@@ -358,7 +358,7 @@ const Haunthauntedspyplay = () => {
                         style={[buttons.button, {
                             width: 264,
                             alignSelf: 'center',
-                            marginBottom: 56,
+                            marginBottom: 35,
                             transform: [{ scale: scaleAnim }]
                         }]}
                     >

@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Image, TouchableOpacity, TextInput, Modal, ScrollView, Animated, Easing, Dimensions } from "react-native";
+import { View, Text, Image, TouchableOpacity, TextInput, Modal, ScrollView, Animated, Easing, Dimensions, KeyboardAvoidingView, Platform } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { buttons, global, menu, play } from "../hauntcnst/hauntstyles";
 import { apple, buttonDec, hauntBack, noavatar, plus, smallArr, watermelon, cherry, awards } from "../hauntcnst/hauntassets";
@@ -58,12 +58,10 @@ const Hauntghostcircleplay = () => {
         return () => clearInterval(timer);
     }, [gameStep]);
 
-    // Initialize entry animations
     useEffect(() => {
         entryAnimations.current = players.map(() => new Animated.Value(0));
     }, []);
 
-    // Screen entry animation
     useEffect(() => {
         Animated.parallel([
             Animated.timing(fadeAnim, {
@@ -93,7 +91,6 @@ const Hauntghostcircleplay = () => {
                players.every(player => player.name.trim() !== '' && player.avatar !== noavatar);
     };
 
-    // Button pulse animation when game is ready
     useEffect(() => {
         if (canStartGame()) {
             Animated.loop(
@@ -289,7 +286,15 @@ const Hauntghostcircleplay = () => {
         const seconds = timeLeft % 60;
 
         return (
-            <View style={{ width: '100%', flexGrow: 1, padding: 20 }}>
+            <KeyboardAvoidingView
+                style={{ flex: 1 }}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
+            >
+                <ScrollView 
+                    contentContainerStyle={{ flexGrow: 1, padding: 20 }}
+                    keyboardShouldPersistTaps="handled"
+                >
                 <View style={{ alignItems: 'center', marginBottom: 30 }}>
                     <View style={{
                         width: 130, 
@@ -324,7 +329,7 @@ const Hauntghostcircleplay = () => {
                             textAlignVertical: 'top',
                             marginBottom: 20,
                             fontSize: 16,
-                            height: height * 0.47,
+                            height: height > 700 ? height * 0.47 : height * 0.35,
                             color: '#fff',
                         }}
                         multiline
@@ -344,7 +349,8 @@ const Hauntghostcircleplay = () => {
                         {currentPlayerIndex < players.length - 1 ? 'Next Player' : 'Finish'}
                     </Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
         );
     };
 
@@ -517,7 +523,7 @@ const Hauntghostcircleplay = () => {
                         style={[buttons.button, {
                             width: 264,
                             alignSelf: 'center',
-                            marginBottom: 56,
+                            marginBottom: 35,
                             transform: [{ scale: scaleAnim }]
                         }]}
                     >
@@ -609,7 +615,7 @@ const Hauntghostcircleplay = () => {
                                         </TouchableOpacity>
 
                                         <Animated.View style={{ 
-                                            width: 206,
+                                            width: index > 1 ? 185 : 206,
                                             transform: [
                                                 { 
                                                     translateY: (entryAnimations.current[index] || new Animated.Value(0)).interpolate({

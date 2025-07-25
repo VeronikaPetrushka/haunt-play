@@ -162,7 +162,7 @@ const Hauntmenuplay: React.FC = () => {
                             source={buttonDec}
                             style={buttons.image}
                         />
-                        <Text style={buttons.buttonText}>{button.button}</Text>
+                        <Text style={[buttons.buttonText, height < 700 && {fontSize: 25}]}>{button.button}</Text>
                     </TouchableOpacity>
                 </Animated.View>
             ))}

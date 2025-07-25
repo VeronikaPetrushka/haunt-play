@@ -1,6 +1,6 @@
 import { Platform, StyleSheet, Dimensions } from 'react-native';
 
-const { height, width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export const FONT = {
     MONTSERRAT: Platform.select({
@@ -45,7 +45,7 @@ export const about = StyleSheet.create({
 
     drakulaImage: {
         width: '100%',
-        flexGrow: 1,
+        height: height * 0.45,
         resizeMode: 'contain'
     },
 
@@ -74,13 +74,13 @@ export const about = StyleSheet.create({
 export const menu = StyleSheet.create({
 
     drakula: {
-        width: 202,
-        height: 203,
+        width: height > 700 ? 190 : 180,
+        height: height > 700 ? 190 : 180,
         resizeMode: 'contain',
         zIndex: 12,
         position: 'absolute',
         left: -30,
-        top: -70
+        top: -60
     },
 
     textContainer: {
@@ -139,8 +139,8 @@ export const buttons = StyleSheet.create({
     },
 
     arrowImage: {
-        width: 84,
-        height: 84,
+        width: height > 700 ? 84 : 64,
+        height: height > 700 ? 84 : 64,
         resizeMode: 'contain'
     },
 

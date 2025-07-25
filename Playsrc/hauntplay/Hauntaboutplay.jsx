@@ -19,7 +19,6 @@ const Hauntaboutplay = () => {
 
     const prevIndexRef = useRef(0);
 
-    // Initial animation on mount
     useEffect(() => {
         if (currentAboutIndex === 0) {
             drakulaSlideAnim.setValue(100);
@@ -34,7 +33,6 @@ const Hauntaboutplay = () => {
     const handleContentChange = (direction) => {
         const newIndex = currentAboutIndex + (direction === 'next' ? 1 : -1);
         
-        // transitions
         const isDrakulaTransition = 
             (currentAboutIndex === 2 && newIndex === 3) || 
             (currentAboutIndex === 3 && newIndex === 2);
@@ -42,7 +40,6 @@ const Hauntaboutplay = () => {
         
         const shouldFadeButtons = [0, 1, 5].includes(newIndex) || [0, 1, 5].includes(currentAboutIndex);
 
-        // Reset animations
         fadeAnim.setValue(0);
         textSlideAnim.setValue(direction === 'next' ? 50 : -50);
         
@@ -59,7 +56,6 @@ const Hauntaboutplay = () => {
         }
 
         Animated.parallel([
-            // Text animation
             Animated.timing(fadeAnim, {
                 toValue: 1,
                 duration: 400,
@@ -73,7 +69,6 @@ const Hauntaboutplay = () => {
                 useNativeDriver: true,
             }),
             
-            // Drakula image animation
             ...(isDrakulaTransition || isInitialTransition ? [
                 Animated.timing(drakulaFadeAnim, {
                     toValue: 1,
@@ -94,7 +89,6 @@ const Hauntaboutplay = () => {
                 ] : [])
             ] : []),
             
-            // Button animation
             ...(shouldFadeButtons ? [
                 Animated.spring(buttonScale, {
                     toValue: 1,
