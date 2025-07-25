@@ -1,10 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, Image, TouchableOpacity, TextInput, Modal, ScrollView, Animated, Easing } from "react-native";
+import { View, Text, Image, TouchableOpacity, TextInput, Modal, ScrollView, Animated, Easing, Dimensions } from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { buttons, global, menu, play } from "../hauntcnst/hauntstyles";
 import { apple, buttonDec, hauntBack, noavatar, plus, smallArr, watermelon, cherry, regenerate, done, failed, awards } from "../hauntcnst/hauntassets";
 import { drakulaAngry, drakulaBlue, drakulaGrand, drakulaGreen, drakulaWhite, drakulaYellow } from "../hauntcnst/hauntplayers";
 import { hauntedTruth, hauntedDare } from "../hauntcnst/hauntedTruthDare";
+
+const { height } = Dimensions.get('window');
 
 const avatars = [
     drakulaAngry,
@@ -263,8 +265,8 @@ const Hauntdarecurseplay = () => {
                     {/* Second place (left) */}
                     {sortedPlayers.length > 1 && (
                         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
-                            <View style={{ width: 90, 
-                                height: 90, 
+                            <View style={{ width: height >  700 ? 90 : 80, 
+                                height: height > 700 ? 90 : 80, 
                                 backgroundColor: '#fff', 
                                 borderRadius: 300, 
                                 alignItems: 'center', 
@@ -286,8 +288,8 @@ const Hauntdarecurseplay = () => {
                     {/* First place (center) */}
                     {sortedPlayers.length > 0 && (
                         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
-                            <View style={{ width: 120, 
-                                height: 120, 
+                            <View style={{ width: height >  700 ? 120 : 110, 
+                                height: height >  700 ? 120 : 110, 
                                 backgroundColor: '#fff', 
                                 borderRadius: 300, 
                                 alignItems: 'center', 
@@ -309,8 +311,8 @@ const Hauntdarecurseplay = () => {
                     {/* Third place (right) */}
                     {sortedPlayers.length > 2 && (
                         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
-                            <View style={{ width: 80, 
-                                height: 80, 
+                            <View style={{ width: height >  700 ? 80 : 70, 
+                                height: height >  700 ? 80 : 70, 
                                 backgroundColor: '#fff', 
                                 borderRadius: 300, 
                                 alignItems: 'center', 
@@ -333,7 +335,7 @@ const Hauntdarecurseplay = () => {
 
                 <ScrollView style={{ marginTop: 40, marginHorizontal: 20 }}>
                     {sortedPlayers.map((player, index) => (
-                        <View key={player.name} style={{ 
+                        <View key={index} style={{ 
                             flexDirection: 'row', 
                             justifyContent: 'space-between',
                             padding: 15,
@@ -348,21 +350,22 @@ const Hauntdarecurseplay = () => {
                             </Text>
                         </View>
                     ))}
-                    <View style={{height: 200}} />
+
+                    <TouchableOpacity
+                        style={[buttons.button, { 
+                            width: 264, 
+                            alignSelf: 'center',
+                            marginTop: 50
+                        }]}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Image source={buttonDec} style={buttons.image} />
+                        <Text style={[buttons.buttonText, { fontSize: 24 }]}>BACK TO MENU</Text>
+                    </TouchableOpacity>
+                    
+                    <View style={{height: 100}} />
                 </ScrollView>
 
-                <TouchableOpacity
-                    style={[buttons.button, { 
-                        width: 264, 
-                        alignSelf: 'center',
-                        position: 'absolute',
-                        bottom: 50
-                    }]}
-                    onPress={() => navigation.goBack()}
-                >
-                    <Image source={buttonDec} style={buttons.image} />
-                    <Text style={[buttons.buttonText, { fontSize: 24 }]}>BACK TO MENU</Text>
-                </TouchableOpacity>
             </View>
         );
     };
@@ -486,7 +489,7 @@ const Hauntdarecurseplay = () => {
                                         </TouchableOpacity>
 
                                         <Animated.View style={{ 
-                                            width: 206,
+                                            width: index > 1 ? 185 : 206,
                                             transform: [
                                                 { 
                                                     translateY: (entryAnimations.current[index] || new Animated.Value(0)).interpolate({

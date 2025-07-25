@@ -32,7 +32,6 @@ const Haunthauntedspyplay = () => {
     const [showGhostSelection, setShowGhostSelection] = useState(false);
     const [showGameDurationSelection, setShowGameDurationSelection] = useState(false);
 
-    // Game flow states
     const [countdown, setCountdown] = useState(3);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const [rolesAssigned, setRolesAssigned] = useState(false);
@@ -44,7 +43,6 @@ const Haunthauntedspyplay = () => {
     const [gameEnded, setGameEnded] = useState(false);
     const [ghostsRevealed, setGhostsRevealed] = useState(false);
 
-    // Animation refs
     const fadeAnim = useRef(new Animated.Value(0)).current;
     const scaleAnim = useRef(new Animated.Value(0.9)).current;
     const buttonPulse = useRef(new Animated.Value(1)).current;
@@ -54,7 +52,6 @@ const Haunthauntedspyplay = () => {
     const cardFlipAnim = useRef(new Animated.Value(0)).current;
     const timerPulse = useRef(new Animated.Value(1)).current;
 
-    // Screen entry animation
     useEffect(() => {
         Animated.parallel([
             Animated.timing(fadeAnim, {
@@ -85,7 +82,6 @@ const Haunthauntedspyplay = () => {
                players.every(player => player.name.trim() !== '' && player.avatar !== noavatar);
     };
 
-    // Button pulse animation
     useEffect(() => {
         if (canStartGame()) {
             Animated.loop(
@@ -182,7 +178,6 @@ const Haunthauntedspyplay = () => {
             }).start();
             setShowRole(true);
         } else {
-            // Move to next player or start game
             if (currentPlayerIndex < players.length - 1) {
                 setCurrentPlayerIndex(currentPlayerIndex + 1);
                 setShowRole(false);
@@ -310,13 +305,11 @@ const Haunthauntedspyplay = () => {
         setChooseAvatar(true);
     };
 
-    // Front of the card interpolation
     const frontInterpolate = cardFlipAnim.interpolate({
         inputRange: [0, 180],
         outputRange: ['0deg', '180deg']
     });
 
-    // Back of the card interpolation
     const backInterpolate = cardFlipAnim.interpolate({
         inputRange: [0, 180],
         outputRange: ['180deg', '360deg']
@@ -454,7 +447,7 @@ const Haunthauntedspyplay = () => {
                                     </TouchableOpacity>
 
                                     <Animated.View style={{ 
-                                        width: 206,
+                                        width: index > 1 ? 185 : 206,
                                         transform: [
                                             { 
                                                 translateY: (entryAnimations.current[index] || new Animated.Value(0)).interpolate({

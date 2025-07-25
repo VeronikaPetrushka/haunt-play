@@ -397,9 +397,9 @@ const Hauntghostcircleplay = () => {
                 <View style={{ flexDirection: 'row', justifyContent: sortedPlayers.length === 1 ? 'center' : sortedPlayers.length === 2 ? 'flex-start' : 'space-between', alignItems: 'flex-end' }}>
                     {/* Second place (left) */}
                     {sortedPlayers.length > 1 && (
-                        <View style={{ marginHorizontal: 10, alignItems: 'center',  marginRight: 20 }}>
-                            <View style={{ width: 90, 
-                                height: 90, 
+                        <View style={{ marginHorizontal: 10, alignItems: 'center',  marginRight: height >  700 ? 15 : 5 }}>
+                            <View style={{ width: height >  700 ? 90 : 80, 
+                                height: height > 700 ? 90 : 80, 
                                 backgroundColor: '#fff', 
                                 borderRadius: 300, 
                                 alignItems: 'center', 
@@ -420,9 +420,9 @@ const Hauntghostcircleplay = () => {
 
                     {/* First place (center) */}
                     {sortedPlayers.length > 0 && (
-                        <View style={{ marginHorizontal: 10, alignItems: 'center', marginRight: 15 }}>
-                            <View style={{ width: 120, 
-                                height: 120, 
+                        <View style={{ marginHorizontal: 10, alignItems: 'center', marginRight: height >  700 ? 15 : 5 }}>
+                            <View style={{ width: height >  700 ? 120 : 110, 
+                                height: height >  700 ? 120 : 110, 
                                 backgroundColor: '#fff', 
                                 borderRadius: 300, 
                                 alignItems: 'center', 
@@ -444,8 +444,8 @@ const Hauntghostcircleplay = () => {
                     {/* Third place (right) */}
                     {sortedPlayers.length > 2 && (
                         <View style={{ marginHorizontal: 10, alignItems: 'center' }}>
-                            <View style={{ width: 80, 
-                                height: 80, 
+                            <View style={{ width: height >  700 ? 80 : 70, 
+                                height: height >  700 ? 80 : 70, 
                                 backgroundColor: '#fff', 
                                 borderRadius: 300, 
                                 alignItems: 'center', 
@@ -469,7 +469,7 @@ const Hauntghostcircleplay = () => {
                 {/* Full results */}
                 <ScrollView style={{ marginTop: 40, marginHorizontal: 20 }}>
                     {sortedPlayers.map((player, index) => (
-                        <View key={player.name} style={{ 
+                        <View key={index} style={{ 
                             flexDirection: 'row', 
                             justifyContent: 'space-between',
                             padding: 15,
@@ -484,20 +484,22 @@ const Hauntghostcircleplay = () => {
                             </Text>
                         </View>
                     ))}
+
+                    <TouchableOpacity
+                        style={[buttons.button, { 
+                            width: 264, 
+                            alignSelf: 'center',
+                            marginTop: 50
+                        }]}
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Image source={buttonDec} style={buttons.image} />
+                        <Text style={[buttons.buttonText, { fontSize: 24 }]}>BACK TO MENU</Text>
+                    </TouchableOpacity>
+
+                    <View style={{height: 100}} />
                 </ScrollView>
 
-                <TouchableOpacity
-                    style={[buttons.button, { 
-                        width: 264, 
-                        alignSelf: 'center',
-                        position: 'absolute',
-                        bottom: 50
-                    }]}
-                    onPress={() => navigation.goBack()}
-                >
-                    <Image source={buttonDec} style={buttons.image} />
-                    <Text style={[buttons.buttonText, { fontSize: 24 }]}>BACK TO MENU</Text>
-                </TouchableOpacity>
             </View>
         );
     };
