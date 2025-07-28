@@ -286,15 +286,10 @@ const Hauntghostcircleplay = () => {
         const seconds = timeLeft % 60;
 
         return (
-            <KeyboardAvoidingView
-                style={{ flex: 1 }}
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
+            <ScrollView 
+                contentContainerStyle={{ flexGrow: 1, padding: 20 }}
+                keyboardShouldPersistTaps="handled"
             >
-                <ScrollView 
-                    contentContainerStyle={{ flexGrow: 1, padding: 20 }}
-                    keyboardShouldPersistTaps="handled"
-                >
                 <View style={{ alignItems: 'center', marginBottom: 30 }}>
                     <View style={{
                         width: 130, 
@@ -349,8 +344,8 @@ const Hauntghostcircleplay = () => {
                         {currentPlayerIndex < players.length - 1 ? 'Next Player' : 'Finish'}
                     </Text>
                 </TouchableOpacity>
+                <View style={{height: 400}} />
             </ScrollView>
-        </KeyboardAvoidingView>
         );
     };
 
