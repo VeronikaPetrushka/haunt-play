@@ -285,10 +285,19 @@ const Hauntghostcircleplay = () => {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
 
+        const inputRef = useRef(null);
+        const hasFocusedRef = useRef(false);
+
+        useEffect(() => {
+            if (!hasFocusedRef.current && inputRef.current) {
+            inputRef.current.focus();
+            hasFocusedRef.current = true;
+            }
+        }, []);
+
         return (
             <ScrollView 
                 contentContainerStyle={{ flexGrow: 1, padding: 20 }}
-                keyboardShouldPersistTaps="handled"
             >
                 <View style={{ alignItems: 'center', marginBottom: 30 }}>
                     <View style={{
@@ -316,6 +325,7 @@ const Hauntghostcircleplay = () => {
                     </Text>
 
                     <TextInput
+                        ref={inputRef}
                         style={{
                             backgroundColor: '#1C77D4',
                             borderRadius: 22,
